@@ -1,0 +1,28 @@
+#form-login {
+	padding: auto;
+	margin-top: 20px;
+	width: 300px;
+	height: 2.5rem;
+	border: 2px solid var(--primary-color);
+	border-radius: 25020px;
+	cursor: pointer;
+	outline: none;
+	background-color: var(--primary-color);
+	color: white;
+}
+#form-login:hover {
+	opacity: 0.8;
+}
+.signup {
+	cursor: pointer;
+	color: var(--primary-color);
+}
+input[name='email'],
+input[name='password'] {
+	outline: none;
+	width: 300px;
+	padding: 10px;
+	margin: 10px 0;
+	border: 2px solid var(--primary-color);
+	border-radius: 8px;
+}

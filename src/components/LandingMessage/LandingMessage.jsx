@@ -1,9 +1,19 @@
 import React from 'react';
 import './LandingMessage.css';
 import { Grid } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function () {
+	const history = useHistory();
+
+	function handleLogin() {
+		history.push('/login');
+	}
+
+	function handleSignup() {
+		history.push('/signup');
+	}
+
 	return (
 		<Grid.Column
 			className="LandingMessage"
@@ -19,11 +29,19 @@ export default function () {
 					type specimen book.
 				</span>
 				<Grid.Row>
-					<Link to="/login">
-						<button id="login">Log in</button>
-					</Link>
+					<button
+						id="login"
+						className="landing-button"
+						onClick={handleLogin}>
+						Log in
+					</button>
 					<Link to="/signup">
-						<button id="signup">Sign up</button>
+						<button
+							id="signup"
+							className="landing-button"
+							onClick={handleSignup}>
+							Sign up
+						</button>
 					</Link>
 				</Grid.Row>
 			</div>
