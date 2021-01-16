@@ -1,0 +1,47 @@
+:root {
+	--primary-color: #2699fb;
+}
+
+.LandingMessage {
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	min-height: 500px;
+	font-size: 21px;
+	line-height: 1.6em;
+}
+.content {
+	margin: auto;
+	width: 50%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+button {
+	padding: auto;
+	margin-top: 20px;
+	width: 100px;
+	height: 2.5rem;
+	border: 2px solid var(--primary-color);
+	border-radius: 25020px;
+	cursor: pointer;
+	outline: none;
+}
+
+#login {
+	background-color: var(--primary-color);
+	margin-right: 20px;
+	color: white;
+}
+#login:hover,
+#signup:hover {
+	opacity: 0.8;
+}
+
+#signup {
+	background-color: white;
+	color: var(--primary-color);
+}
