@@ -7,16 +7,14 @@ import { Grid } from 'semantic-ui-react';
 
 export default function LeftSideComponent() {
 	return (
-		<Grid className="LeftSideComponent">
-			<Grid.Row>
-				<SearchBar />
-			</Grid.Row>
+		<Grid.Column id="LeftSideComponent">
+			<SearchBar />
 			<Grid.Row>
 				<ConversationList />
 			</Grid.Row>
 			<Grid.Row>
 				<BottomNav />
 			</Grid.Row>
-		</Grid>
+		</Grid.Column>
 	);
 }

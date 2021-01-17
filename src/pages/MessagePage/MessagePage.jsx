@@ -8,7 +8,7 @@ export default function () {
 		<Grid
 			divided="vertically"
 			style={{ height: '100vh', padding: 0, margin: 0 }}>
-			<Grid.Row style={{ padding: 0, margin: 0 }}>
+			<Grid.Row style={{ padding: 0, margin: 0 }} columns={2}>
 				<LeftSideComponent />
 				<LeftSideComponent />
 			</Grid.Row>
