@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
+import userService from '../../utils/userService';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { Grid } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
-export default function () {
+export default function LoginForm({ handleUser }) {
 	const history = useHistory();
 	const [state, setState] = useState({
-		username: '',
-		email: ''
+		email: '',
+		password: ''
 	});
+	const [error, setError] = useState('');
 
 	function handleClick() {
 		history.push('/signup');
@@ -20,17 +23,30 @@ export default function () {
 			[e.target.name]: e.target.value
 		});
 	}
+
+	async function handleSubmit(e) {
+		e.preventDefault();
+
+		try {
+			await userService.login(state);
+			handleUser();
+			history.push('/');
+		} catch (err) {
+			setError(err.message);
+		}
+	}
+
 	return (
 		<Grid.Column>
-			<form autoComplete="off">
-				<label for="email">Email</label>
+			<form autoComplete="off" onSubmit={handleSubmit}>
+				<label htmlFor="email">Email</label>
 				<input
 					type="email"
 					name="email"
 					placeholder="Email"
 					onChange={handleChange}
 					required></input>
-				<label for="password">Password</label>
+				<label htmlFor="password">Password</label>
 				<input
 					type="password"
 					name="password"
@@ -41,9 +57,10 @@ export default function () {
 					Log in
 				</button>
 			</form>
+			{error ? <ErrorMessage error={error} /> : null}
 			<div>
 				Don't have an account?
-				<span onClick={handleClick} class="signup">
+				<span onClick={handleClick} className="signup">
 					Sign Up
 				</span>
 			</div>

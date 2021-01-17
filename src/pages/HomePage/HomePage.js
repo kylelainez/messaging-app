@@ -4,7 +4,7 @@ import BigLogo from '../../components/BigLogo/BigLogo';
 import LandingMessage from '../../components/LandingMessage/LandingMessage';
 import { Grid } from 'semantic-ui-react';
 
-export default function LoginPage(props) {
+export default function LoginPage({ user }) {
 	return (
 		<Grid
 			divided="vertically"

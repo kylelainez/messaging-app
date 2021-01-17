@@ -7,7 +7,7 @@ export default function (props) {
 			className="BigLogo"
 			width={8}
 			style={{ padding: 0, margin: 0 }}>
-			<div class="BigLogo-content">
+			<div className="BigLogo-content">
 				Join now and talk with your friends!
 			</div>
 		</Grid.Column>
