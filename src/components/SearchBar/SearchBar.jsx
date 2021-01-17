@@ -1,8 +1,8 @@
 import React from 'react';
 import './SearchBar.css';
 import { Grid, Segment } from 'semantic-ui-react';
-import profile from './account_circle-24px.svg';
-import search from './search-24px.svg';
+import profile from './../../images/account_circle-24px.svg';
+import search from './../../images/search-24px.svg';
 
 export default function SearchBar() {
 	return (
