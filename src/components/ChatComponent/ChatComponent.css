@@ -19,4 +19,17 @@
 	border-top: 1px solid gray;
 	padding: 0;
 	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.ChatFieldItem {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+form[name='messageForm'] {
+	display: flex;
 }
