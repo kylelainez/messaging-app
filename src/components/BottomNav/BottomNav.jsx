@@ -9,15 +9,15 @@ export default function () {
 	return (
 		<Menu fluid widths={3} borderless icon="labeled" className="Bottom-Nav">
 			<Menu.Item>
-				<img src={Contacts} />
+				<img src={Contacts} alt="contacts" />
 				Contacts
 			</Menu.Item>
 			<Menu.Item>
-				<img src={Messages} />
+				<img src={Messages} alt="messages" />
 				Messages
 			</Menu.Item>
 			<Menu.Item>
-				<img src={Settings} />
+				<img src={Settings} alt="settings" />
 				Settings
 			</Menu.Item>
 		</Menu>

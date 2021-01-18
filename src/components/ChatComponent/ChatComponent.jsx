@@ -43,7 +43,7 @@ export default function ({ messages, messagesRef, firebase, user }) {
 						verticalAlign="middle"
 						textAlign="left"
 						width={1}>
-						<img src={Image} height="35px" />
+						<img src={Image} height="35px" alt="gallery" />
 					</Grid.Column>
 					<Grid.Column
 						style={{ padding: 0, margin: 0 }}
@@ -60,7 +60,7 @@ export default function ({ messages, messagesRef, firebase, user }) {
 								onChange={handleInput}
 								value={state.message}
 							/>
-							<input type="image" src={Send} />
+							<input type="image" src={Send} alt="send" />
 						</form>
 					</Grid.Column>
 				</Grid.Row>
