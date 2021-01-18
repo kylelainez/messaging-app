@@ -7,7 +7,7 @@ import Settings from './../../images/settings-24px.svg';
 
 export default function () {
 	return (
-		<Menu fluid widths={3} borderless icon="labeled">
+		<Menu fluid widths={3} borderless icon="labeled" className="Bottom-Nav">
 			<Menu.Item>
 				<img src={Contacts} />
 				Contacts

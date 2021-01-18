@@ -1,0 +1,20 @@
+#Chat-Component {
+	width: 80vw !important;
+	border-left: 1px solid gray;
+	display: flex;
+	flex-direction: column;
+}
+
+#TopBar {
+	height: 60px;
+	border-bottom: 1px solid gray;
+}
+#MessageField {
+	flex: 1 1 auto;
+}
+
+#ChatField {
+	flex: 0 1 60px;
+	height: 60px;
+	/* bottom: 0; */
+}

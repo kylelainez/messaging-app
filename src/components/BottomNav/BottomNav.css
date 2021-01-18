@@ -1,3 +1,5 @@
-.tab {
-	justify-content: space-between;
+.Bottom-Nav {
+	position: absolute;
+	bottom: 0;
+	height: 60px;
 }

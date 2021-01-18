@@ -7,10 +7,10 @@ import search from './../../images/search-24px.svg';
 export default function SearchBar() {
 	return (
 		<Grid style={{ padding: 0, margin: 0 }} className="SearchBar">
-			<Grid.Column>
+			<Grid.Column style={{ padding: '1rem' }}>
 				<img src={profile} />
 			</Grid.Column>
-			<Grid.Column>
+			<Grid.Column style={{ padding: '1rem 2rem' }}>
 				<img src={search} />
 			</Grid.Column>
 		</Grid>
