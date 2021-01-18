@@ -11,13 +11,13 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 export default function ({ user }) {
 	if (!firebase.apps.length) {
 		firebase.initializeApp({
-			apiKey: 'AIzaSyAtcKqWBUIoVXWVO6naHAF1y8EFwTTBjJg',
-			authDomain: 'chat-app-90905.firebaseapp.com',
-			projectId: 'chat-app-90905',
-			storageBucket: 'chat-app-90905.appspot.com',
-			messagingSenderId: '100126804543',
-			appId: '1:100126804543:web:8f7b9fd4b50753b1d2c68a',
-			measurementId: 'G-55R9HMJKYS'
+			apiKey: process.env.REACT_APP_apiKey,
+			authDomain: process.env.REACT_APP_authDomain,
+			projectId: process.env.REACT_APP_projectId,
+			storageBucket: process.env.REACT_APP_storageBucket,
+			messagingSenderId: process.env.REACT_APP_messagingSenderId,
+			appId: process.env.REACT_APP_appId,
+			measurementId: process.env.REACT_APP_measurementId
 		});
 	} else {
 		firebase.app();
