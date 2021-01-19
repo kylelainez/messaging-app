@@ -1,16 +1,16 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const SECRET = process.env.SECRET;
+const SECRET = process.env.REACT_APP_SECRET;
 const { v4: uuidv4 } = require('uuid');
 const S3 = require('aws-sdk/clients/s3');
 const s3 = new S3();
 module.exports = {
 	signup,
-	login
+	login,
+	index
 };
 
 function signup(req, res) {
-	console.log(req.file);
 	const filePath = `${uuidv4()}/${req.file.originalname}`;
 	const params = {
 		Bucket: 'catcollector1205',
@@ -45,6 +45,13 @@ async function login(req, res) {
 	} catch (err) {
 		return res.status(401).json(err);
 	}
+}
+
+async function index(req, res) {
+	try {
+		const users = await User.find({}).exec();
+		res.status(200).json({ users: users });
+	} catch (err) {}
 }
 
 /*----- Helper Functions -----*/
