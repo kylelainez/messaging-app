@@ -9,7 +9,13 @@ const userSchema = new mongoose.Schema(
 		lastName: String,
 		photoUrl: String,
 		email: { type: String, required: true, lowercase: true, unique: true },
-		password: String
+		password: String,
+		conversationList: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Conversation'
+			}
+		]
 	},
 	{
 		timestamps: true

@@ -41,13 +41,12 @@ function login(creds) {
 		})
 		.then(({ token }) => tokenService.setToken(token));
 }
-/* prettier-ignore */
 function getAllUsers() {
 	return fetch(BASE_URL, {
 		header: {
-		  'Authorization': 'Bearer ' + tokenService.getToken()
+			Authorization: 'Bearer ' + tokenService.getToken()
 		}
-	  }).then(res => res.json())
+	}).then((res) => res.json());
 }
 
 export default {

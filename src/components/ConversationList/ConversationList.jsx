@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ConversationList.css';
 import { Grid } from 'semantic-ui-react';
 import userService from '../../utils/userService';
+import Contact from '../Contact/Contact';
 
-export default function () {
+export default function ({ handleConversation, user }) {
 	const [contacts, setContacts] = useState([]);
 	async function getUsers() {
 		try {
@@ -13,15 +14,24 @@ export default function () {
 			console.log(err);
 		}
 	}
+	useEffect(() => {
+		getUsers();
+	}, []);
 	return (
 		<>
-			<div onClick={getUsers}>Conversation List</div>
+			<div>Conversation List</div>
 			{contacts.length
-				? contacts.map((contact, idx) => (
-						<div key={`contact-${idx}`}>
-							{contact.firstName} {contact.lastName}
-						</div>
-				  ))
+				? contacts.map((contact, idx) => {
+						// Will Create separate component later on
+						if (contact._id !== user._id)
+							return (
+								<Contact
+									key={`contact${idx}`}
+									handleConversation={handleConversation}
+									contact={contact}
+								/>
+							);
+				  })
 				: ''}
 		</>
 	);
