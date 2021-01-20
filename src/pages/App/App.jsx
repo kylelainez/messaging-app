@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
@@ -9,13 +9,12 @@ import MessagePage from '../MessagePage/MessagePage';
 import userService from '../../utils/userService';
 
 function App() {
-	const [user, setUser] = useState(userService.getUser());
+	const [user, setUser] = useState(userService.getUserId());
 	const history = useHistory();
 
 	function handleUser() {
-		setUser(userService.getUser());
+		setUser(userService.getUserId());
 	}
-
 	return (
 		<div className="App">
 			<Switch>
@@ -23,11 +22,7 @@ function App() {
 					exact
 					path="/"
 					render={() =>
-						user ? (
-							<Redirect to="/messages" />
-						) : (
-							<HomePage user={user} />
-						)
+						user ? <Redirect to="/messages" /> : <HomePage />
 					}
 				/>
 				<Route

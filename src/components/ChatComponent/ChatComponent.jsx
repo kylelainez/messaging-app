@@ -17,7 +17,7 @@ export default function ({ messages, messagesRef, firebase, user }) {
 		await messagesRef.add({
 			text: state.message,
 			createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-			sender: user._id
+			sender: user
 		});
 		setState({ message: '' });
 	}

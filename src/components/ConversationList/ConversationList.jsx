@@ -2,35 +2,31 @@ import React, { useState, useEffect } from 'react';
 import './ConversationList.css';
 import { Grid } from 'semantic-ui-react';
 import userService from '../../utils/userService';
-import Contact from '../Contact/Contact';
+import Conversations from '../Conversations/Conversations';
 
-export default function ({ handleConversation, user }) {
-	const [contacts, setContacts] = useState([]);
-	async function getUsers() {
-		try {
-			const users = await userService.getAllUsers();
-			setContacts([...users.users]);
-		} catch (err) {
-			console.log(err);
-		}
+export default function ({ handleConversation }) {
+	const [user, setUser] = useState('');
+	async function getUser() {
+		const getuser = await userService.getUser();
+		setUser(getuser.user);
+		console.log(getuser.user.conversationList, 'here');
 	}
 	useEffect(() => {
-		getUsers();
+		getUser();
 	}, []);
 	return (
 		<>
 			<div>Conversation List</div>
-			{contacts.length
-				? contacts.map((contact, idx) => {
+			{user.conversationList
+				? user.conversationList.map((conversation, idx) => {
 						// Will Create separate component later on
-						if (contact._id !== user._id)
-							return (
-								<Contact
-									key={`contact${idx}`}
-									handleConversation={handleConversation}
-									contact={contact}
-								/>
-							);
+						return (
+							<Conversations
+								key={`conversation-${idx}`}
+								handleConversation={handleConversation}
+								conversation={conversation}
+							/>
+						);
 				  })
 				: ''}
 		</>

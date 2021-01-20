@@ -28,7 +28,6 @@ export default function ({ user }) {
 	const messagesRef = firestore.collection('messages');
 	const query = messagesRef.orderBy('createdAt').limitToLast(25);
 	const [messages] = useCollectionData(query, { idField: 'id' });
-
 	/* Firebase End */
 
 	const [conversation, setConversation] = useState({
@@ -41,7 +40,6 @@ export default function ({ user }) {
 			conversation: ''
 		});
 	}
-
 	return (
 		<Grid
 			divided="vertically"

@@ -21,7 +21,15 @@ function signup(user) {
 }
 
 function getUser() {
-	return tokenService.getUserFromToken();
+	return fetch(BASE_URL + getUserId(), {
+		header: {
+			Authorization: 'Bearer ' + tokenService.getToken()
+		}
+	}).then((res) => res.json());
+}
+
+function getUserId() {
+	return tokenService.getUserFromToken()._id;
 }
 
 function logout() {
@@ -54,5 +62,6 @@ export default {
 	getUser,
 	logout,
 	login,
-	getAllUsers
+	getAllUsers,
+	getUserId
 };

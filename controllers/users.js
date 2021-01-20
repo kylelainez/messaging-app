@@ -7,7 +7,8 @@ const s3 = new S3();
 module.exports = {
 	signup,
 	login,
-	index
+	index,
+	getUser
 };
 
 function signup(req, res) {
@@ -51,6 +52,15 @@ async function index(req, res) {
 	try {
 		const users = await User.find({}).exec();
 		res.status(200).json({ users: users });
+	} catch (err) {}
+}
+
+async function getUser(req, res) {
+	try {
+		const user = await User.findById(req.params.id).populate(
+			'conversationList'
+		);
+		return res.status(200).json({ user });
 	} catch (err) {}
 }
 

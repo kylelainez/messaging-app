@@ -2,7 +2,14 @@ import userService from './userService';
 import tokenService from './tokenService';
 const BASE_URL = '/api/conversations';
 
-function getConversation(userId) {}
+function getConversation(userId) {
+	return fetch(BASE_URL + userId, {
+		headers: { 'Content-Type': 'application/json' },
+		header: {
+			Authorization: 'Bearer ' + tokenService.getToken()
+		}
+	}).then((res) => res.json());
+}
 
 function createConversation(userId) {
 	return fetch(BASE_URL, {
