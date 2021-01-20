@@ -10,6 +10,10 @@ import 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 export default function ({ user }) {
+	const [state, setState] = useState({
+		conversation: ''
+	});
+
 	/* Firebase  */
 	if (!firebase.apps.length) {
 		firebase.initializeApp({
@@ -26,26 +30,35 @@ export default function ({ user }) {
 	}
 	const firestore = firebase.firestore();
 	const messagesRef = firestore.collection('messages');
-	const query = messagesRef.orderBy('createdAt').limitToLast(25);
+	const query = messagesRef.orderBy('createdAt');
 	const [messages] = useCollectionData(query, { idField: 'id' });
 	/* Firebase End */
 
-	const [conversation, setConversation] = useState({
-		conversation: ''
-	});
-
-	function handleConversation(userId) {
-		const conversation = conversationService.createConversation(userId);
-		setConversation({
-			conversation: ''
+	async function handleContactClick(userId) {
+		const conversation = await conversationService.createConversation(
+			userId
+		);
+		setState({
+			conversation: { ...conversation.conversation }
 		});
 	}
+
+	async function handleConversation(conversationId) {
+		const conversation = await conversationService.getConversation(
+			conversationId
+		);
+		setState({
+			conversation: { ...conversation.conversation }
+		});
+	}
+
 	return (
 		<Grid
 			divided="vertically"
 			style={{ height: '100vh', padding: 0, margin: 0 }}>
 			<Grid.Row style={{ padding: 0, margin: 0 }} columns={2}>
 				<LeftSideComponent
+					handleContactClick={handleContactClick}
 					handleConversation={handleConversation}
 					user={user}
 				/>
@@ -54,6 +67,7 @@ export default function ({ user }) {
 					messagesRef={messagesRef}
 					firebase={firebase}
 					user={user}
+					conversation={state}
 				/>
 			</Grid.Row>
 		</Grid>

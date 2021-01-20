@@ -29,7 +29,9 @@ function getUser() {
 }
 
 function getUserId() {
-	return tokenService.getUserFromToken()._id;
+	return tokenService.getUserFromToken()
+		? tokenService.getUserFromToken()._id
+		: tokenService.getUserFromToken();
 }
 
 function logout() {

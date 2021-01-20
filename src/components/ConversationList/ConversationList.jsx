@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './ConversationList.css';
-import { Grid } from 'semantic-ui-react';
 import userService from '../../utils/userService';
 import Conversations from '../Conversations/Conversations';
 
@@ -9,10 +8,12 @@ export default function ({ handleConversation }) {
 	async function getUser() {
 		const getuser = await userService.getUser();
 		setUser(getuser.user);
-		console.log(getuser.user.conversationList, 'here');
 	}
 	useEffect(() => {
-		getUser();
+		function getData() {
+			getUser();
+		}
+		return getData();
 	}, []);
 	return (
 		<>

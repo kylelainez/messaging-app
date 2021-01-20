@@ -2,10 +2,9 @@ const Conversation = require('../models/conversations');
 const User = require('../models/user');
 const ObjectId = require('mongoose').Types.ObjectId;
 
-function getConversation(req, res) {
-	console.log(req.params.id);
-	const conversation = Conversation.findById(req.params.id);
-	return res.status(200).json({ conversation });
+async function getConversation(req, res) {
+	const conversation = await Conversation.findById(req.params.id);
+	return res.status(201).json({ conversation });
 }
 async function postConversation(req, res) {
 	if (req.body.currentUser === req.body.targetUser) return res.status(404);
@@ -37,7 +36,7 @@ async function postConversation(req, res) {
 			await currentUser.save();
 			await targetUser.save();
 
-			return res.status(201).json({ conversation: newConversation });
+			return res.status(201).json({ newConversation });
 		}
 	} catch (err) {
 		throw new Error('Error Creating Conversation');

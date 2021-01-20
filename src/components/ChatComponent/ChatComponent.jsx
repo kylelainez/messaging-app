@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ChatComponent.css';
 import { Grid } from 'semantic-ui-react';
 import MessageBubble from './../MessageBubble/MessageBubble';
 import Image from '../../images/insert_photo-24px.svg';
 import Send from '../../images/send-24px.svg';
+import userService from '../../utils/userService';
 
-export default function ({ messages, messagesRef, firebase, user }) {
-	const [state, setState] = useState({ message: '' });
+export default function ({ messages, messagesRef, firebase, conversation }) {
+	const [state, setState] = useState({ message: '', user: {} });
 
 	function handleInput(e) {
-		setState({ message: e.target.value });
+		setState({ ...state, message: e.target.value });
 	}
+
 	async function onSubmit(e) {
 		e.preventDefault();
-
 		await messagesRef.add({
 			text: state.message,
 			createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-			sender: user
+			sender: state.user._id,
+			conversation: conversation.conversation._id
 		});
-		setState({ message: '' });
+		setState({ ...state, message: '' });
 	}
+
+	useEffect(() => {
+		async function getData() {
+			const user = await userService.getUser();
+			return setState({
+				...state,
+				user: user.user
+			});
+		}
+		getData();
+	}, []);
 	return (
 		<Grid.Column
 			id="Chat-Component"
@@ -31,7 +44,12 @@ export default function ({ messages, messagesRef, firebase, user }) {
 				<div>
 					{messages &&
 						messages.map((msg, idx) => (
-							<MessageBubble message={msg} key={idx} />
+							<MessageBubble
+								message={msg}
+								key={idx}
+								user={state.user._id}
+								conversation={conversation}
+							/>
 						))}
 				</div>
 			</Grid.Row>
