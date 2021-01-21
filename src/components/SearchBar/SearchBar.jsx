@@ -22,7 +22,7 @@ export default function SearchBar({ searchState, handleSearch, searchValue }) {
 				''
 			)}
 			<Grid.Column style={{ padding: '1rem 2rem' }}>
-				<img src={search} alt="search" />
+				{searchState ? <img src={search} alt="search" /> : ''}
 			</Grid.Column>
 		</Grid>
 	);
