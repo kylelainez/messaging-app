@@ -1,8 +1,9 @@
 import React from 'react';
 
-export default function ({ contact, handleConversation }) {
+export default function ({ contact, handleContactClick, handleSelected }) {
 	function handleClick() {
-		handleConversation(contact._id);
+		handleContactClick(contact._id);
+		// handleSelected('messages');
 	}
 	return (
 		<div onClick={handleClick}>

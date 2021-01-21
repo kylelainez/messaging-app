@@ -8,6 +8,7 @@ async function getConversation(req, res) {
 }
 async function postConversation(req, res) {
 	if (req.body.currentUser === req.body.targetUser) return res.status(404);
+	console.log(req.body, 'body');
 	try {
 		const conversation = await Conversation.findOne({
 			$and: [
@@ -30,7 +31,7 @@ async function postConversation(req, res) {
 			});
 			const currentUser = await User.findById(req.body.currentUser);
 			const targetUser = await User.findById(req.body.targetUser);
-
+			console.log('currentUser', currentUser);
 			currentUser.conversationList.push(newConversation._id);
 			targetUser.conversationList.push(newConversation._id);
 			await currentUser.save();
@@ -39,6 +40,7 @@ async function postConversation(req, res) {
 			return res.status(201).json({ newConversation });
 		}
 	} catch (err) {
+		console.log(err);
 		throw new Error('Error Creating Conversation');
 	}
 }

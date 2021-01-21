@@ -15,7 +15,7 @@ function createConversation(userId) {
 	return fetch(BASE_URL, {
 		method: 'POST',
 		body: JSON.stringify({
-			currentUser: userService.getUser()._id,
+			currentUser: userService.getUserId(),
 			targetUser: userId
 		}),
 		headers: { 'Content-Type': 'application/json' },
