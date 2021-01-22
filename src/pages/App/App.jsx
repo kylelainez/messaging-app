@@ -52,7 +52,7 @@ function App() {
 					path="/messages"
 					render={() =>
 						user ? (
-							<MessagePage user={user} />
+							<MessagePage user={user} handleUser={handleUser} />
 						) : (
 							<Redirect to="/login" />
 						)

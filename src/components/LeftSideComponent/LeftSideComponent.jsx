@@ -4,13 +4,15 @@ import SearchBar from '../SearchBar/SearchBar';
 import BottomNav from '../BottomNav/BottomNav';
 import ConversationList from '../../components/ConversationList/ConversationList';
 import ContactList from '../../components/ContactList/ContactList';
+import Settings from '../../components/Settings/Settings';
 import { Grid } from 'semantic-ui-react';
 import { getDefaultNormalizer } from '@testing-library/react';
 
 export default function LeftSideComponent({
 	handleContactClick,
 	handleConversation,
-	user
+	user,
+	handleUser
 }) {
 	const [state, setState] = useState({
 		menu: 'messages',
@@ -48,7 +50,7 @@ export default function LeftSideComponent({
 						searchValue={state}
 					/>
 				) : state.menu == 'settings' ? (
-					<div>{/* Settings here */}</div>
+					<Settings handleUser={handleUser} />
 				) : (
 					<ConversationList
 						handleConversation={handleConversation}

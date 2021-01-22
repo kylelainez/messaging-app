@@ -9,7 +9,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-export default function ({ user }) {
+export default function ({ user, handleUser }) {
 	const [state, setState] = useState({
 		conversation: ''
 	});
@@ -61,6 +61,7 @@ export default function ({ user }) {
 					handleContactClick={handleContactClick}
 					handleConversation={handleConversation}
 					user={user}
+					handleUser={handleUser}
 				/>
 				<ChatComponent
 					messages={messages}
