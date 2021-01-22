@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const messagCtrl = require('../../controllers/message');
+const messageCtrl = require('../../controllers/message');
 const multer = require('multer');
 const upload = multer();
 
-router.post('/photo', upload.single('photo'), messagCtrl.sendPhoto());
+router.post('/', messageCtrl.sendMessage);
+router.post('/photo', upload.single('photo'), messageCtrl.sendPhoto);
 
 module.exports = router;

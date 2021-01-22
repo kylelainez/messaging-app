@@ -52,10 +52,7 @@ export default function LeftSideComponent({
 				) : state.menu == 'settings' ? (
 					<Settings handleUser={handleUser} />
 				) : (
-					<ConversationList
-						handleConversation={handleConversation}
-						user={user}
-					/>
+					<ConversationList handleConversation={handleConversation} />
 				)}
 			</Grid.Row>
 			<Grid.Row>

@@ -9,6 +9,9 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
+import io from 'socket.io-client';
+const socket = io();
+
 export default function ({ user, handleUser }) {
 	const [state, setState] = useState({
 		conversation: ''
@@ -51,6 +54,15 @@ export default function ({ user, handleUser }) {
 			conversation: { ...conversation.conversation }
 		});
 	}
+
+	socket.on('connect', () => {
+		socket.on('chat message', (msg) => {
+			console.log('client receives this', msg);
+			if (socket.connected) {
+				console.log(socket.id);
+			}
+		});
+	});
 
 	return (
 		<Grid

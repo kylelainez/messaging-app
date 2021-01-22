@@ -56,6 +56,7 @@ async function index(req, res) {
 }
 
 async function getUser(req, res) {
+	// req.app.get('_io').emit('chat message', 'test');
 	try {
 		const user = await User.findById(req.params.id).populate(
 			'conversationList'

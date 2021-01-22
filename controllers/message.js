@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const S3 = require('aws-sdk/clients/s3');
 const s3 = new S3();
+const Message = require('../models/message');
 
 function sendPhoto(req, res) {
 	const filePath = `${uuidv4()}/${req.file.originalname}`;
@@ -12,9 +13,15 @@ function sendPhoto(req, res) {
 
 	s3.upload(params, async (err, data) => {
 		try {
-			//Save to Database
+			// Upload Message and Save to Database
 		} catch (err) {
 			// Probably a duplicate email
 		}
 	});
 }
+function sendMessage(req, res) {}
+
+module.exports = {
+	sendPhoto,
+	sendMessage
+};

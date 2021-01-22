@@ -1,10 +1,10 @@
 import tokenService from './tokenService';
 const BASE_URL = '/api/message/';
 
-function uploadPhoto(object) {
+function uploadPhoto(message) {
 	fetch(BASE_URL + 'photo', {
 		method: 'POST',
-		body: object,
+		body: message,
 		header: {
 			Authorization: 'Bearer ' + tokenService.getToken()
 		}
@@ -20,8 +20,17 @@ function uploadMessage(message) {
 		}
 	}).then((res) => res.json());
 }
+function getConversationMessages(conversationId) {
+	fetch(BASE_URL + conversationId, {
+		headers: { 'Content-Type': 'application/json' },
+		header: {
+			Authorization: 'Bearer ' + tokenService.getToken()
+		}
+	}).then((res) => res.json());
+}
 
 export default {
 	uploadPhoto,
-	uploadMessage
+	uploadMessage,
+	getConversationMessages
 };
