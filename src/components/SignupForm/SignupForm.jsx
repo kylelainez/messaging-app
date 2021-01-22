@@ -39,9 +39,6 @@ export default function ({ handleUser }) {
 			formData.append(key, state[key]);
 		}
 
-		for (let p of formData.entries()) {
-			console.log(p[0], p[1]);
-		}
 		try {
 			await userService.signup(formData);
 			handleUser();

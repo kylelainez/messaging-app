@@ -8,7 +8,7 @@ function signup(user) {
 			method: 'POST',
 			body: user
 		})
-			.then(async (res) => {
+			.then((res) => {
 				if (res.ok) return res.json();
 				// Probably a duplicate email
 				throw new Error('Email already taken!');

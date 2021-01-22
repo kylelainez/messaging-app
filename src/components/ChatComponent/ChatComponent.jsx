@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './ChatComponent.css';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Modal, Button, Form } from 'semantic-ui-react';
 import MessageBubble from './../MessageBubble/MessageBubble';
 import Image from '../../images/insert_photo-24px.svg';
 import Send from '../../images/send-24px.svg';
 import userService from '../../utils/userService';
+import messageService from '../../utils/messageService';
 
 export default function ({ messages, messagesRef, firebase, conversation }) {
-	const [state, setState] = useState({ message: '', user: {} });
+	const [state, setState] = useState({
+		message: '',
+		user: {},
+		imageUpload: false,
+		selectedFile: ''
+	});
 
 	function handleInput(e) {
 		setState({ ...state, message: e.target.value });
@@ -22,6 +28,35 @@ export default function ({ messages, messagesRef, firebase, conversation }) {
 			conversation: conversation.conversation._id
 		});
 		setState({ ...state, message: '' });
+	}
+
+	function openImageUpload() {
+		setState({
+			...state,
+			imageUpload: true
+		});
+	}
+	function closeImageUpload() {
+		setState({
+			...state,
+			imageUpload: false
+		});
+	}
+
+	async function handleImageSubmit(e) {
+		e.preventDefault();
+		const formData = new FormData();
+		formData.append('photo', state.selectedFile);
+		try {
+			await messageService.uploadPhoto();
+		} catch (err) {}
+		closeImageUpload();
+	}
+	function handleFileInput(e) {
+		setState({
+			...state,
+			selectedFile: e.target.files[0]
+		});
 	}
 
 	useEffect(() => {
@@ -61,7 +96,35 @@ export default function ({ messages, messagesRef, firebase, conversation }) {
 						verticalAlign="middle"
 						textAlign="left"
 						width={1}>
-						<img src={Image} height="35px" alt="gallery" />
+						<Modal
+							onClose={closeImageUpload}
+							onOpen={openImageUpload}
+							open={state.imageUpload}
+							trigger={
+								<img src={Image} height="35px" alt="gallery" />
+							}>
+							<Modal.Header>Select a Photo</Modal.Header>
+							<Modal.Content>
+								<form
+									name="image-upload"
+									onSubmit={handleImageSubmit}>
+									<input
+										type="file"
+										name="photo"
+										onChange={handleFileInput}
+										accept="image/*"
+										required
+									/>
+									<hr />
+									<Button
+										color="black"
+										onClick={closeImageUpload}>
+										Cancel
+									</Button>
+									<input type="submit" value="Submit" />
+								</form>
+							</Modal.Content>
+						</Modal>
 					</Grid.Column>
 					<Grid.Column
 						style={{ padding: 0, margin: 0 }}
