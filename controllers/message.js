@@ -19,9 +19,14 @@ function sendPhoto(req, res) {
 		}
 	});
 }
-function sendMessage(req, res) {
-	console.log(req.body);
-	res.json();
+async function sendMessage(req, res) {
+	try {
+		const newMessage = new Message(req.body);
+		await newMessage.save();
+		res.status(200).json({ newMessage });
+	} catch (err) {
+		res.status(400).json(err);
+	}
 }
 
 module.exports = {

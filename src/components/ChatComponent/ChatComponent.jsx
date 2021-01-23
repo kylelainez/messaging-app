@@ -21,7 +21,11 @@ export default function ({ conversation }) {
 
 	async function onSubmit(e) {
 		e.preventDefault();
-
+		const formData = {};
+		formData['message'] = state.message;
+		formData['sender'] = state.user._id;
+		formData['conversation'] = conversation.conversation._id;
+		await messageService.uploadMessage(formData);
 		setState({ ...state, message: '' });
 	}
 

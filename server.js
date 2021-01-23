@@ -29,16 +29,28 @@ app.get('/*', function (req, res) {
 });
 
 const port = process.env.PORT || 3001;
+const activeUsers = new Set();
+
 io.on('connection', function (socket) {
-	console.log('a user connected', socket.id);
-	socket.on('disconnect', function () {
-		console.log('User Disconnected');
+	console.log('Made socket connection');
+
+	socket.on('new user', function (data) {
+		socket.userId = data;
+		activeUsers.add(data);
+		io.emit('new user', [...activeUsers]);
 	});
-	socket.on('example_message', function (msg) {
-		console.log('message: ' + msg);
+
+	socket.on('disconnect', () => {
+		activeUsers.delete(socket.userId);
+		io.emit('user disconnected', socket.userId);
 	});
-	socket.on('chat message', (msg) => {
-		socket.broadcast.emit('chat message', msg);
+
+	socket.on('chat message', function (data) {
+		io.emit('chat message', data);
+	});
+
+	socket.on('typing', function (data) {
+		socket.broadcast.emit('typing', data);
 	});
 });
 
