@@ -46,9 +46,9 @@ export default function ({ conversation }) {
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append('photo', state.selectedFile);
-		try {
-			await messageService.uploadPhoto();
-		} catch (err) {}
+		formData.append('sender', state.user._id);
+		formData.append('conversation', conversation.conversation._id);
+		await messageService.uploadPhoto(formData);
 		closeImageUpload();
 	}
 	function handleFileInput(e) {

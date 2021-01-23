@@ -10,12 +10,21 @@ function sendPhoto(req, res) {
 		Key: filePath,
 		Body: req.file.buffer
 	};
+	console.log(req.body);
+	console.log(req.file);
 
 	s3.upload(params, async (err, data) => {
 		try {
 			// Upload Message and Save to Database
+			const message = new Message({
+				...req.body,
+				message: data.Location,
+				isImage: true
+			});
+			await message.save();
+			res.status(200).json({ message });
 		} catch (err) {
-			// Probably a duplicate email
+			res.status(400).json(err);
 		}
 	});
 }
