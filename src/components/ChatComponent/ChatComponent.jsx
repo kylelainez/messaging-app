@@ -7,7 +7,7 @@ import Send from '../../images/send-24px.svg';
 import userService from '../../utils/userService';
 import messageService from '../../utils/messageService';
 
-export default function ({ messages, messagesRef, firebase, conversation }) {
+export default function ({ conversation }) {
 	const [state, setState] = useState({
 		message: '',
 		user: {},
@@ -21,12 +21,7 @@ export default function ({ messages, messagesRef, firebase, conversation }) {
 
 	async function onSubmit(e) {
 		e.preventDefault();
-		await messagesRef.add({
-			text: state.message,
-			createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-			sender: state.user._id,
-			conversation: conversation.conversation._id
-		});
+
 		setState({ ...state, message: '' });
 	}
 
@@ -77,7 +72,7 @@ export default function ({ messages, messagesRef, firebase, conversation }) {
 			<Grid.Row id="MessageField">
 				Message Field
 				<div>
-					{messages &&
+					{/* {messages &&
 						messages.map((msg, idx) => (
 							<MessageBubble
 								message={msg}
@@ -85,7 +80,7 @@ export default function ({ messages, messagesRef, firebase, conversation }) {
 								user={state.user._id}
 								conversation={conversation}
 							/>
-						))}
+						))} */}
 				</div>
 			</Grid.Row>
 			<Grid divided="vertically" id="ChatField">

@@ -19,7 +19,10 @@ function sendPhoto(req, res) {
 		}
 	});
 }
-function sendMessage(req, res) {}
+function sendMessage(req, res) {
+	console.log(req.body);
+	res.json();
+}
 
 module.exports = {
 	sendPhoto,
