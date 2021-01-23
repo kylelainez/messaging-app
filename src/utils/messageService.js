@@ -21,8 +21,8 @@ function uploadMessage(message) {
 		}
 	}).then((res) => res.json());
 }
-async function getConversationMessages(conversationId) {
-	await fetch(BASE_URL + conversationId, {
+function getConversationMessages(conversationId) {
+	return fetch(BASE_URL + conversationId, {
 		headers: { 'Content-Type': 'application/json' },
 		header: {
 			Authorization: 'Bearer ' + tokenService.getToken()

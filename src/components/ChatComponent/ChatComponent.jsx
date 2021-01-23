@@ -24,7 +24,7 @@ export default function ({ conversation }) {
 		const formData = {};
 		formData['message'] = state.message;
 		formData['sender'] = state.user._id;
-		formData['conversation'] = conversation.conversation._id;
+		formData['conversation'] = conversation._id;
 		await messageService.uploadMessage(formData);
 		setState({ ...state, message: '' });
 	}
@@ -47,7 +47,7 @@ export default function ({ conversation }) {
 		const formData = new FormData();
 		formData.append('photo', state.selectedFile);
 		formData.append('sender', state.user._id);
-		formData.append('conversation', conversation.conversation._id);
+		formData.append('conversation', conversation._id);
 		await messageService.uploadPhoto(formData);
 		closeImageUpload();
 	}

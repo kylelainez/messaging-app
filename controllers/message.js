@@ -10,8 +10,6 @@ function sendPhoto(req, res) {
 		Key: filePath,
 		Body: req.file.buffer
 	};
-	console.log(req.body);
-	console.log(req.file);
 
 	s3.upload(params, async (err, data) => {
 		try {
@@ -38,7 +36,16 @@ async function sendMessage(req, res) {
 	}
 }
 
+async function getMessages(req, res) {
+	console.log(req.params.id);
+	const messages = await Message.find({
+		conversation: req.params.id
+	}).populate('Sender');
+	res.status(200).json({ messages });
+}
+
 module.exports = {
 	sendPhoto,
-	sendMessage
+	sendMessage,
+	getMessages
 };

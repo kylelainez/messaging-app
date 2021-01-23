@@ -6,5 +6,6 @@ const upload = multer();
 
 router.post('/', messageCtrl.sendMessage);
 router.post('/photo', upload.single('photo'), messageCtrl.sendPhoto);
+router.get('/:id', messageCtrl.getMessages);
 
 module.exports = router;
