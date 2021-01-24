@@ -39,13 +39,10 @@ export default function ({ handleUser }) {
 		});
 	}
 
-	async function handleConversation(conversationId) {
-		const conversation = await conversationService.getConversation(
-			conversationId
-		);
+	async function handleConversation(conversation) {
 		setState({
 			...state,
-			conversation: { ...conversation.conversation }
+			conversation: conversation
 		});
 	}
 
