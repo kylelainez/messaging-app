@@ -7,7 +7,7 @@ import Send from '../../images/send-24px.svg';
 import userService from '../../utils/userService';
 import messageService from '../../utils/messageService';
 
-export default function ({ conversation, messages }) {
+export default function ({ conversation, messages, user }) {
 	const [state, setState] = useState({
 		message: '',
 		user: {},
@@ -59,14 +59,10 @@ export default function ({ conversation, messages }) {
 	}
 
 	useEffect(() => {
-		async function getData() {
-			const user = await userService.getUser();
-			return setState({
-				...state,
-				user: user.user
-			});
-		}
-		getData();
+		setState({
+			...state,
+			user: user
+		});
 	}, []);
 	return (
 		<Grid.Column

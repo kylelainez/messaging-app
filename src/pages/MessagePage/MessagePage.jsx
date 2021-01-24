@@ -16,6 +16,7 @@ export default function ({ handleUser }) {
 		user: '',
 		messages: {}
 	});
+	const [loading, setLoading] = useState(true);
 
 	async function getData() {
 		const getuser = await userService.getUser();
@@ -46,35 +47,49 @@ export default function ({ handleUser }) {
 		});
 	}
 
-	socket.on('connect', () => {
-		socket.on('chat message', (msg) => {
-			console.log('client receives this', msg);
-			if (socket.connected) {
-				console.log(socket.id);
-			}
-		});
-	});
+	// socket.on('connect', () => {
+	// 	socket.on('chat message', (msg) => {
+	// 		console.log('client receives this', msg);
+	// 		if (socket.connected) {
+	// 			console.log(socket.id);
+	// 		}
+	// 	});
+	// });
 
 	useEffect(() => {
-		getData();
+		let mounted = true;
+		async function get() {
+			await getData();
+			if (mounted) {
+				setLoading(false);
+			}
+		}
+		get();
+		return function cleanUp() {
+			mounted = false;
+		};
 	}, []);
 	return (
 		<Grid
 			divided="vertically"
 			style={{ height: '100vh', padding: 0, margin: 0 }}>
-			<Grid.Row style={{ padding: 0, margin: 0 }} columns={2}>
-				<LeftSideComponent
-					handleContactClick={handleContactClick}
-					handleConversation={handleConversation}
-					user={state.user}
-					handleUser={handleUser}
-				/>
-				<ChatComponent
-					user={state.user}
-					conversation={state.conversation}
-					messages={state.messages}
-				/>
-			</Grid.Row>
+			{loading ? (
+				''
+			) : (
+				<Grid.Row style={{ padding: 0, margin: 0 }} columns={2}>
+					<LeftSideComponent
+						handleContactClick={handleContactClick}
+						handleConversation={handleConversation}
+						user={state.user}
+						handleUser={handleUser}
+					/>
+					<ChatComponent
+						user={state.user}
+						conversation={state.conversation}
+						messages={state.messages}
+					/>
+				</Grid.Row>
+			)}
 		</Grid>
 	);
 }

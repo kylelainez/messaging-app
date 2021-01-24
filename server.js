@@ -10,7 +10,10 @@ require('./config/database');
 
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+	pingInterval: 15000,
+	pignTimeout: 10000
+});
 
 // add in when the app is ready to be deployed
 // app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
@@ -42,6 +45,7 @@ io.on('connection', function (socket) {
 
 	socket.on('disconnect', () => {
 		activeUsers.delete(socket.userId);
+		console.log('user disconnected');
 		io.emit('user disconnected', socket.userId);
 	});
 
