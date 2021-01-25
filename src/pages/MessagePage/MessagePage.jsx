@@ -37,15 +37,15 @@ export default function ({ handleUser }) {
 			userId
 		);
 		if(state.messages[conversation.conversation._id] === undefined){
-			const messages = {
-				[conversation.conversation._id]: {
-					messages: []
-				}
-			}
 			setState({
 				...state,
 				conversation: { ...conversation.conversation },
-				messages: messages
+				messages: {
+					...state.messages,
+					[conversation.conversation._id]: {
+						messages: []
+					}
+				}
 			});
 		}else{
 			setState({
@@ -76,9 +76,30 @@ export default function ({ handleUser }) {
 		
 	}
 	function addNewMessage(data){
-		const conversation = state.messages[data.conversation._id];
+		const conversation = state.messages[data.conversation._id] 
+							? state.messages[data.conversation._id]
+							: {
+								messages: []
+							};
 		conversation.messages.push(data);
 		console.log(state)
+		let userContainsConversation = false;
+		for(let conv in state.user.conversationList){
+			if(conv._id === data.conversation._id){
+				userContainsConversation = true;
+			}
+		}
+		if(!userContainsConversation){
+			const convList = state.user.conversationList;
+			convList.push(data.conversation);
+			setState({
+				...state,
+				user: {
+					...state.user,
+					conversationList: convList
+				}
+			})
+		}
 		setState({
 			...state,
 			messages: {
