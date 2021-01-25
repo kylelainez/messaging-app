@@ -70,15 +70,6 @@ export default function ({ conversation, messages, user }) {
 			style={{ height: '100vh', padding: 0, margin: 0 }}>
 			<Grid.Row id="TopBar">top bar</Grid.Row>
 			<Grid.Row id="MessageField">
-				{/* {messages &&
-						messages.map((msg, idx) => (
-							<MessageBubble
-								message={msg}
-								key={idx}
-								user={state.user._id}
-								conversation={conversation}
-							/>
-						))} */}
 				{conversation
 					? messages[conversation._id]['messages'].map((msg, idx) => (
 							<MessageBubble

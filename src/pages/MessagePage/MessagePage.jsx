@@ -8,7 +8,7 @@ import userService from '../../utils/userService';
 
 import io from 'socket.io-client';
 import messageService from '../../utils/messageService';
-const socket = io();
+
 
 export default function ({ handleUser }) {
 	const [state, setState] = useState({
@@ -26,7 +26,7 @@ export default function ({ handleUser }) {
 				conversation._id
 			] = await messageService.getConversationMessages(conversation._id);
 		}
-		console.log(messages);
+		initializeSocket(getuser.user);
 		setState({ ...state, user: getuser.user, messages: messages });
 	}
 
@@ -34,11 +34,31 @@ export default function ({ handleUser }) {
 		const conversation = await conversationService.createConversation(
 			userId
 		);
-		setState({
+		const messages = {
+			[conversation.newConversation._id]: {
+				messages: []
+			}
+		}
+		
+		await setState({
 			...state,
-			conversation: { ...conversation.conversation }
+			conversation: { ...conversation.newConversation },
+			messages: messages
 		});
 	}
+
+
+	function initializeSocket(user){
+		const socket = io()
+		socket.emit('new user', user);
+		socket.on('new user', (data)=> {
+			console.log('new user has logged in' , data)
+		})
+		socket.on('directed message', (data) => {
+			console.log(data)
+		})
+	}
+
 
 	async function handleConversation(conversation) {
 		setState({
@@ -46,16 +66,6 @@ export default function ({ handleUser }) {
 			conversation: conversation
 		});
 	}
-
-	// socket.on('connect', () => {
-	// 	socket.on('chat message', (msg) => {
-	// 		console.log('client receives this', msg);
-	// 		if (socket.connected) {
-	// 			console.log(socket.id);
-	// 		}
-	// 	});
-	// });
-
 	useEffect(() => {
 		let mounted = true;
 		async function get() {
@@ -65,6 +75,7 @@ export default function ({ handleUser }) {
 			}
 		}
 		get();
+		
 		return function cleanUp() {
 			mounted = false;
 		};

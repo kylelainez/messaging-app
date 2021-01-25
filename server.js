@@ -32,29 +32,37 @@ app.get('/*', function (req, res) {
 });
 
 const port = process.env.PORT || 3001;
-const activeUsers = new Set();
+const activeUsers = {};
 
 io.on('connection', function (socket) {
 	console.log('Made socket connection');
 
-	socket.on('new user', function (data) {
-		socket.userId = data;
-		activeUsers.add(data);
-		io.emit('new user', [...activeUsers]);
+	socket.on('logged in', function (data) {
+		if(!(data === null || data=== undefined)){
+			const newUser = data;
+			newUser.clientId = socket.id;
+			activeUsers[data._id]  = newUser;
+			socket.broadcast.emit('new user', data);
+		}
+		
 	});
 
 	socket.on('disconnect', () => {
-		activeUsers.delete(socket.userId);
-		console.log('user disconnected');
-		io.emit('user disconnected', socket.userId);
+		for(let user in activeUsers){
+			if(socket.id === activeUsers[user].clientId){
+				delete activeUsers[user];
+				io.emit('user disconnected', socket.userId);
+			}
+		}
+		
 	});
 
-	socket.on('chat message', function (data) {
-		io.emit('chat message', data);
-	});
-
-	socket.on('typing', function (data) {
-		socket.broadcast.emit('typing', data);
+	socket.on('message', function (data) {
+		for(let member of data.conversation.members){
+			if(activeUsers[member] !== undefined){
+				io.to(activeUsers[member].clientId).emit('message', data)
+			}
+		}
 	});
 });
 
