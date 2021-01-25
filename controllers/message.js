@@ -28,16 +28,15 @@ function sendPhoto(req, res) {
 }
 async function sendMessage(req, res) {
 	try {
-		const newMessage = new Message(req.body);
+		const newMessage = new Message(req.body).populate('conversation');
 		await newMessage.save();
-		res.status(200).json({ newMessage });
+		res.status(201).json({ newMessage });
 	} catch (err) {
 		res.status(400).json(err);
 	}
 }
 
 async function getMessages(req, res) {
-	console.log(req.params.id);
 	const messages = await Message.find({
 		conversation: req.params.id
 	}).populate('Sender');

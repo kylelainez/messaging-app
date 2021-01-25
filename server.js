@@ -48,6 +48,7 @@ io.on('connection', function (socket) {
 	});
 
 	socket.on('disconnect', () => {
+		console.log('user disconnected')
 		for(let user in activeUsers){
 			if(socket.id === activeUsers[user].clientId){
 				delete activeUsers[user];

@@ -2,7 +2,7 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/message/';
 
 function uploadPhoto(message) {
-	fetch(BASE_URL + 'photo', {
+	return fetch(BASE_URL + 'photo', {
 		method: 'POST',
 		body: message,
 		header: {
@@ -12,7 +12,7 @@ function uploadPhoto(message) {
 }
 
 function uploadMessage(message) {
-	fetch(BASE_URL, {
+	return fetch(BASE_URL, {
 		method: 'POST',
 		body: JSON.stringify(message),
 		headers: { 'Content-Type': 'application/json' },

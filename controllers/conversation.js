@@ -23,7 +23,7 @@ async function postConversation(req, res) {
 		} else {
 			// If there is no conversation,
 			// Create a new Conversation with the 2 members
-			const newConversation = await Conversation.create({
+			const conversation = await Conversation.create({
 				members: [
 					new ObjectId(req.body.currentUser),
 					new ObjectId(req.body.targetUser)
@@ -32,12 +32,12 @@ async function postConversation(req, res) {
 			const currentUser = await User.findById(req.body.currentUser);
 			const targetUser = await User.findById(req.body.targetUser);
 			console.log('currentUser', currentUser);
-			currentUser.conversationList.push(newConversation._id);
-			targetUser.conversationList.push(newConversation._id);
+			currentUser.conversationList.push(conversation._id);
+			targetUser.conversationList.push(conversation._id);
 			await currentUser.save();
 			await targetUser.save();
 
-			return res.status(201).json({ newConversation });
+			return res.status(201).json({ conversation });
 		}
 	} catch (err) {
 		console.log(err);

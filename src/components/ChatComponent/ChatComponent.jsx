@@ -6,8 +6,9 @@ import Image from '../../images/insert_photo-24px.svg';
 import Send from '../../images/send-24px.svg';
 import userService from '../../utils/userService';
 import messageService from '../../utils/messageService';
+import { SSL_OP_COOKIE_EXCHANGE } from 'constants';
 
-export default function ({ conversation, messages, user }) {
+export default function ({ conversation, messages, user, handleEmit }) {
 	const [state, setState] = useState({
 		message: '',
 		user: {},
@@ -25,7 +26,8 @@ export default function ({ conversation, messages, user }) {
 		formData['message'] = state.message;
 		formData['sender'] = state.user._id;
 		formData['conversation'] = conversation._id;
-		await messageService.uploadMessage(formData);
+		const newMessage = await messageService.uploadMessage(formData);
+		handleEmit(newMessage.newMessage)
 		setState({ ...state, message: '' });
 	}
 

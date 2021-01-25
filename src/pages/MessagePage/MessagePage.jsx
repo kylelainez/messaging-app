@@ -6,18 +6,19 @@ import { Grid } from 'semantic-ui-react';
 import conversationService from '../../utils/conversationService';
 import userService from '../../utils/userService';
 
-import io from 'socket.io-client';
+import {socket} from './socket';
 import messageService from '../../utils/messageService';
 
 
 export default function ({ handleUser }) {
 	const [state, setState] = useState({
 		conversation: '',
-		user: '',
-		messages: {}
+		activeUsers: [],
+		messages:{},
+		user: ''
 	});
 	const [loading, setLoading] = useState(true);
-
+	
 	async function getData() {
 		const getuser = await userService.getUser();
 		const messages = {};
@@ -26,37 +27,78 @@ export default function ({ handleUser }) {
 				conversation._id
 			] = await messageService.getConversationMessages(conversation._id);
 		}
-		initializeSocket(getuser.user);
-		setState({ ...state, user: getuser.user, messages: messages });
+		
+		await setState({ ...state, user: getuser.user, messages: messages });
+		// initializeSocket(getuser.user)
 	}
 
 	async function handleContactClick(userId) {
 		const conversation = await conversationService.createConversation(
 			userId
 		);
-		const messages = {
-			[conversation.newConversation._id]: {
-				messages: []
+		if(state.messages[conversation.conversation._id] === undefined){
+			const messages = {
+				[conversation.conversation._id]: {
+					messages: []
+				}
 			}
+			setState({
+				...state,
+				conversation: { ...conversation.conversation },
+				messages: messages
+			});
+		}else{
+			setState({
+				...state,
+				conversation: { ...conversation.conversation }
+			});
 		}
-		
-		await setState({
-			...state,
-			conversation: { ...conversation.newConversation },
-			messages: messages
-		});
+			
 	}
 
 
-	function initializeSocket(user){
-		const socket = io()
-		socket.emit('new user', user);
-		socket.on('new user', (data)=> {
-			console.log('new user has logged in' , data)
+	function initializeSocket(){
+		if(state.user !== ''){
+			socket.emit('logged in',state.user);
+			socket.on('logged in', (data)=> {
+				console.log('new User')
+				const activeUsers = state.activeUsers;
+				activeUsers.push(data);
+				setState({
+					...state,
+					activeUsers: activeUsers
+				})
+			})
+			socket.on('message', (data) => {
+				addNewMessage(data);
+			})
+		}
+		
+	}
+	function addNewMessage(data){
+		const conversation = state.messages[data.conversation._id];
+		conversation.messages.push(data);
+		console.log(state)
+		setState({
+			...state,
+			messages: {
+				...state.messages,
+				[data.conversation._id]: conversation
+			}
 		})
-		socket.on('directed message', (data) => {
-			console.log(data)
-		})
+	}
+
+	useEffect(() => {
+		initializeSocket()
+		return function cleanUp(){
+			socket.off('message')
+		}
+	},[state.user, state.conversation])
+
+	function handleEmit(message){
+		message.conversation = state.conversation;
+		socket.emit('message', message);
+		// console.log(socket)
 	}
 
 
@@ -75,11 +117,11 @@ export default function ({ handleUser }) {
 			}
 		}
 		get();
-		
 		return function cleanUp() {
 			mounted = false;
 		};
 	}, []);
+
 	return (
 		<Grid
 			divided="vertically"
@@ -98,6 +140,7 @@ export default function ({ handleUser }) {
 						user={state.user}
 						conversation={state.conversation}
 						messages={state.messages}
+						handleEmit={handleEmit}
 					/>
 				</Grid.Row>
 			)}
