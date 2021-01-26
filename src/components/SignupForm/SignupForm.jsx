@@ -93,7 +93,7 @@ export default function ({ handleUser }) {
 					placeholder="Confirm Password"
 					onChange={handleChange}
 					required></input>
-				<label for="photo">
+				<label htmlFor="photo">
 					Select Profile Picture:
 				</label>
 				<input
