@@ -6,6 +6,7 @@
 	min-height: 500px;
 	font-size: 21px;
 	line-height: 1.6em;
+	background: linear-gradient(to right bottom, rgba(255,255,255, 0.7), rgba(255,255,255,0.3));
 }
 .content {
 	margin: auto;
@@ -15,29 +16,38 @@
 	flex-direction: column;
 	justify-content: center;
 }
+.content .period{
+	font-size: 3rem;
+}
 
 .landing-button {
 	padding: auto;
 	margin-top: 20px;
-	width: 100px;
+	width: 200px;
 	height: 2.5rem;
 	border: 2px solid var(--primary-color);
 	border-radius: 25020px;
 	cursor: pointer;
 	outline: none;
+	color: #426696;
+	font-weight: 600;
+	opacity: 0.8;
 }
 
 #login {
-	background-color: var(--primary-color);
 	margin-right: 20px;
-	color: white;
+	color: #ffffff;
+	font-weight: 600;
+	opacity: 0.8;
+	background: linear-gradient(to right top, rgba(31, 212, 179, 0.9), #5bd7eb);
 }
 #login:hover,
 #signup:hover {
-	opacity: 0.8;
+	opacity: 0.7;
 }
 
 #signup {
 	background-color: white;
-	color: var(--primary-color);
+	color: #426696da;
 }
+	

@@ -84,7 +84,9 @@ export default function ({ handleUser }) {
 		conversation.messages.push(data);
 		console.log(state)
 		let userContainsConversation = false;
-		for(let conv in state.user.conversationList){
+		console.log(state.user)
+		for(let conv of state.user.conversationList){
+			console.log(conv._id, 'here')
 			if(conv._id === data.conversation._id){
 				userContainsConversation = true;
 			}

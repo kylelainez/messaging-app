@@ -2,3 +2,39 @@
 	color: var(--primary-color);
 	cursor: pointer;
 }
+.signupPage{
+	display: flex !important;
+	flex-direction: column;
+	min-width: 50vw;
+	height: 100vh;
+	background: linear-gradient(to right bottom, rgba(255,255,255, 0.7), rgba(255,255,255,0.3));
+	justify-content: center;
+	align-items: center;
+	font-size: 0.8rem;
+}
+
+.signupPage form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: left;
+	margin: 0 auto;
+	max-width: 400px;
+}
+.signupPage div{
+	padding-top: 5%;
+}
+
+.signupPage input{
+	outline: none;
+	width: 300px;
+	padding: 10px;
+	margin: 10px 0;
+	border: 2px solid var(--primary-color);
+	border-radius: 8px;
+}
+.login {
+	cursor: pointer;
+	color: #064392;
+}
+

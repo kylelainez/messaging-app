@@ -37,16 +37,15 @@ export default function LoginForm({ handleUser }) {
 	}
 
 	return (
-		<Grid.Column>
+		<Grid.Column className="loginPage">
+			<h1>Log in</h1>
 			<form autoComplete="off" onSubmit={handleSubmit}>
-				<label htmlFor="email">Email</label>
 				<input
 					type="email"
 					name="email"
 					placeholder="Email"
 					onChange={handleChange}
 					required></input>
-				<label htmlFor="password">Password</label>
 				<input
 					type="password"
 					name="password"
@@ -59,7 +58,7 @@ export default function LoginForm({ handleUser }) {
 			</form>
 			{error ? <ErrorMessage error={error} /> : null}
 			<div>
-				Don't have an account?
+				Don't have an account?&nbsp;
 				<span onClick={handleClick} className="signup">
 					Sign Up
 				</span>

@@ -58,50 +58,50 @@ export default function ({ handleUser }) {
 	}
 
 	return (
-		<Grid.Column>
+		<Grid.Column className="signupPage">
+			<h1>Sign Up</h1>
 			<form
 				autoComplete="off"
 				onSubmit={handleSubmit}
 				encType="multipart/form-data">
-				<label htmlFor="firstName">First Name</label>
 				<input
 					type="text"
 					name="firstName"
 					placeholder="First Name"
 					onChange={handleChange}
 					required></input>
-				<label htmlFor="lastName">Last Name</label>
 				<input
 					type="text"
 					name="lastName"
 					placeholder="Last Name"
 					onChange={handleChange}
 					required></input>
-				<label htmlFor="email">Email</label>
 				<input
 					type="email"
 					name="email"
 					placeholder="Email"
 					onChange={handleChange}
 					required></input>
-				<label htmlFor="password">Password</label>
 				<input
 					type="password"
 					name="password"
 					placeholder="Password"
 					onChange={handleChange}
 					required></input>
-				<label htmlFor="passwordConf">Password</label>
 				<input
 					type="password"
 					name="passwordConf"
 					placeholder="Confirm Password"
 					onChange={handleChange}
 					required></input>
+				<label for="photo">
+					Select Profile Picture:
+				</label>
 				<input
 					type="file"
 					name="photo"
 					placeholder="Upload Image"
+					accept="image/*"
 					onChange={handleFileInput}
 					required></input>
 				<button type="submit" id="form-login">
@@ -110,7 +110,7 @@ export default function ({ handleUser }) {
 			</form>
 			{error ? <ErrorMessage error={error} /> : null}
 			<div>
-				Already have an account?
+				Already have an account? &nbsp;
 				<span onClick={handleClick} className="login">
 					Log in
 				</span>

@@ -3,22 +3,23 @@
 	margin-top: 20px;
 	width: 300px;
 	height: 2.5rem;
-	border: 2px solid var(--primary-color);
+	border: 0;
 	border-radius: 25020px;
 	cursor: pointer;
 	outline: none;
-	background-color: var(--primary-color);
+	background: linear-gradient(to right top,#65dfc9, #6cdbeb);
 	color: white;
+	
 }
 #form-login:hover {
 	opacity: 0.8;
 }
 .signup {
 	cursor: pointer;
-	color: var(--primary-color);
+	color: #064392;
 }
-input[name='email'],
-input[name='password'] {
+.loginPage input[name='email'],
+.loginPage input[name='password'] {
 	outline: none;
 	width: 300px;
 	padding: 10px;
@@ -26,3 +27,26 @@ input[name='password'] {
 	border: 2px solid var(--primary-color);
 	border-radius: 8px;
 }
+
+.loginPage{
+	display: flex !important;
+	flex-direction: column;
+	min-width: 50vw;
+	height: 100vh;
+	background: linear-gradient(to right bottom, rgba(255,255,255, 0.7), rgba(255,255,255,0.3));
+	justify-content: center;
+	align-items: center;
+	font-size: 0.8rem;
+}
+.loginPage form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: left;
+	margin: 0 auto;
+	max-width: 400px;
+}
+.loginPage div{
+	padding-top: 5%;
+}
+
