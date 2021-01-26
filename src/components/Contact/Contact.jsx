@@ -8,7 +8,7 @@ export default function ({ contact, handleContactClick, handleSelected }) {
 	}
 	return (
 		<div onClick={handleClick} class="contact">
-			<img src={contact.photoUrl} alt="profile photo" class="contactPhoto"/>
+			<img src={contact.photoUrl} alt="profile" class="contactPhoto"/>
 			{contact.firstName} {contact.lastName}
 		</div>
 	);

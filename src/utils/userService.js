@@ -28,6 +28,14 @@ function getUser() {
 	}).then((res) => res.json());
 }
 
+function getUserFromId(id){
+	return fetch(BASE_URL + id, {
+		header: {
+			Authorization: 'Bearer ' + tokenService.getToken()
+		}
+	}).then((res) => res.json());
+}
+
 function getUserId() {
 	return tokenService.getUserFromToken()
 		? tokenService.getUserFromToken()._id
@@ -65,5 +73,6 @@ export default {
 	logout,
 	login,
 	getAllUsers,
-	getUserId
+	getUserId,
+	getUserFromId
 };

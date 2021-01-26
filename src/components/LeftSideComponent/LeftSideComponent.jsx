@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './LeftSideComponent.css';
 import SearchBar from '../SearchBar/SearchBar';
 import BottomNav from '../BottomNav/BottomNav';
@@ -6,7 +6,7 @@ import ConversationList from '../../components/ConversationList/ConversationList
 import ContactList from '../../components/ContactList/ContactList';
 import Settings from '../../components/Settings/Settings';
 import { Grid } from 'semantic-ui-react';
-import { getDefaultNormalizer } from '@testing-library/react';
+
 
 export default function LeftSideComponent({
 	handleContactClick,
@@ -43,14 +43,14 @@ export default function LeftSideComponent({
 				searchValue={state.search}
 				user={user}
 			/>
-			<Grid.Row class="scroll-auto">
-				{state.menu == 'contacts' ? (
+			<Grid.Row className="scroll-auto">
+				{state.menu === 'contacts' ? (
 					<ContactList
 						handleContactClick={handleContactClick}
 						handleSelected={handleSelected}
 						searchValue={state}
 					/>
-				) : state.menu == 'settings' ? (
+				) : state.menu === 'settings' ? (
 					<Settings handleUser={handleUser} />
 				) : (
 					<ConversationList

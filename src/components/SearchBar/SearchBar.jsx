@@ -7,7 +7,7 @@ export default function SearchBar({ searchState, handleSearch, searchValue, user
 	return (
 		<Grid style={{ padding: 0, margin: 0 }} className="SearchBar">
 			<Grid.Column style={{ padding: '1rem' }} className="profilePictureHolder">
-				<img src={user.photoUrl} alt="profile" class="profilePicture" />
+				<img src={user.photoUrl} alt="profile" className="profilePicture" />
 			</Grid.Column>
 			{searchState ? (
 				<Grid.Column>
