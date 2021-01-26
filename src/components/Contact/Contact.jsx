@@ -1,4 +1,5 @@
 import React from 'react';
+import './Contact.css'
 
 export default function ({ contact, handleContactClick, handleSelected }) {
 	function handleClick() {
@@ -6,7 +7,8 @@ export default function ({ contact, handleContactClick, handleSelected }) {
 		// handleSelected('messages');
 	}
 	return (
-		<div onClick={handleClick}>
+		<div onClick={handleClick} class="contact">
+			<img src={contact.photoUrl} alt="profile photo" class="contactPhoto"/>
 			{contact.firstName} {contact.lastName}
 		</div>
 	);

@@ -41,8 +41,9 @@ export default function LeftSideComponent({
 				searchState={state.searchDisplay}
 				handleSearch={handleSearch}
 				searchValue={state.search}
+				user={user}
 			/>
-			<Grid.Row>
+			<Grid.Row class="scroll-auto">
 				{state.menu == 'contacts' ? (
 					<ContactList
 						handleContactClick={handleContactClick}

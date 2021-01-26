@@ -1,14 +1,13 @@
 import React from 'react';
 import './SearchBar.css';
 import { Grid } from 'semantic-ui-react';
-import profile from './../../images/account_circle-24px.svg';
 import search from './../../images/search-24px.svg';
 
-export default function SearchBar({ searchState, handleSearch, searchValue }) {
+export default function SearchBar({ searchState, handleSearch, searchValue, user }) {
 	return (
 		<Grid style={{ padding: 0, margin: 0 }} className="SearchBar">
-			<Grid.Column style={{ padding: '1rem' }}>
-				<img src={profile} alt="profile" />
+			<Grid.Column style={{ padding: '1rem' }} className="profilePictureHolder">
+				<img src={user.photoUrl} alt="profile" class="profilePicture" />
 			</Grid.Column>
 			{searchState ? (
 				<Grid.Column>
@@ -16,6 +15,7 @@ export default function SearchBar({ searchState, handleSearch, searchValue }) {
 						type="text"
 						value={searchValue}
 						onChange={handleSearch}
+						name="filter"
 					/>
 				</Grid.Column>
 			) : (

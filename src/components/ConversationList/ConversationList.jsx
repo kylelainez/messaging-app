@@ -6,7 +6,6 @@ import Conversations from '../Conversations/Conversations';
 export default function ({ handleConversation, user }) {
 	return (
 		<>
-			<div>Conversation List</div>
 			{user
 				? user.conversationList.map((conversation, idx) => {
 						// Will Create separate component later on
@@ -15,6 +14,7 @@ export default function ({ handleConversation, user }) {
 								key={`conversation-${idx}`}
 								handleConversation={handleConversation}
 								conversation={conversation}
+								user={user}
 							/>
 						);
 				  })

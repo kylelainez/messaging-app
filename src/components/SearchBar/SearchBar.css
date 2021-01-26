@@ -1,5 +1,22 @@
 .SearchBar {
 	justify-content: space-between;
 	height: 60px;
-	border-bottom: 1px solid gray;
+}
+.profilePicture{
+	object-fit: cover;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	margin: -20px;
+}
+
+input[name="filter"]{
+	outline: none;
+	border: none;
+	width: 15vw;
+	height: 40px;
+	margin-left: -4vw;
+	margin-top: -9px;
+	padding: 10px;
+	border-radius: 256px;
 }
