@@ -14,7 +14,7 @@ export default function ({ handleUser }) {
 	return (
 		<>
 			<form onSubmit={logout}>
-				<input type="submit" value="Log out" />
+				<input type="submit" value="Log out" className="logout"/>
 			</form>
 		</>
 	);
