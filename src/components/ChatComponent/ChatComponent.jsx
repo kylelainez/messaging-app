@@ -130,7 +130,7 @@ export default function ({ conversation, messages, user, handleEmit, member }) {
 										onClick={closeImageUpload}>
 										Cancel
 									</Button>
-									<input type="submit" value="Submit" />
+									<input type="submit" value="Submit" className="imageSubmit"/>
 								</form>
 							</Modal.Content>
 						</Modal>
