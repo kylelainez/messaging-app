@@ -1,5 +1,5 @@
 :root {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Poppins', sans-serif !important;
 	font-size: 24px;
 }
 html,
@@ -7,6 +7,7 @@ body {
 	margin: 0;
 	height: 100%;
 	overflow: hidden;	
+	font-family: 'Poppins', sans-serif !important;
 }
 
 .App {

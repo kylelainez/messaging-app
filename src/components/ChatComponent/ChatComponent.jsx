@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './ChatComponent.css';
-import { Grid, Modal, Button, Form, Message } from 'semantic-ui-react';
+import { Grid, Modal, Button } from 'semantic-ui-react';
 import MessageBubble from './../MessageBubble/MessageBubble';
 import Image from '../../images/insert_photo-24px.svg';
 import Send from '../../images/send-24px.svg';
 import userService from '../../utils/userService';
 import messageService from '../../utils/messageService';
-import { SSL_OP_COOKIE_EXCHANGE } from 'constants';
 
-export default function ({ conversation, messages, user, handleEmit }) {
+export default function ({ conversation, messages, user, handleEmit, member }) {
 	const [state, setState] = useState({
 		message: '',
 		user: {},
@@ -70,7 +69,12 @@ export default function ({ conversation, messages, user, handleEmit }) {
 		<Grid.Column
 			id="Chat-Component"
 			style={{ height: '100vh', padding: 0, margin: 0 }}>
-			<Grid.Row id="TopBar">top bar</Grid.Row>
+			<Grid.Row id="TopBar"> 
+				<img src={member.photoUrl} className="profilePicture" alt=""/>
+				<span>
+					{member.firstName} {member.lastName}
+				</span>
+			</Grid.Row>
 			<Grid.Row id="MessageField">
 				{conversation
 					? messages[conversation._id]['messages'].map((msg, idx) => (

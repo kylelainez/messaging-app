@@ -19,7 +19,10 @@ export default function SearchBar({ searchState, handleSearch, searchValue, user
 					/>
 				</Grid.Column>
 			) : (
-				''
+				<Grid.Column className="name">
+					{`${user.firstName} ${user.lastName}`}
+				</Grid.Column>
+				
 			)}
 			<Grid.Column style={{ padding: '1rem 2rem' }}>
 				{searchState ? <img src={search} alt="search" /> : ''}

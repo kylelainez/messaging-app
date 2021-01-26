@@ -3,8 +3,7 @@ import './Contact.css'
 
 export default function ({ contact, handleContactClick, handleSelected }) {
 	function handleClick() {
-		handleContactClick(contact._id);
-		// handleSelected('messages');
+		handleContactClick(contact);
 	}
 	return (
 		<div onClick={handleClick} class="contact">

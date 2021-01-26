@@ -15,7 +15,8 @@ export default function ({ handleUser }) {
 		conversation: '',
 		activeUsers: [],
 		messages:{},
-		user: ''
+		user: '',
+		member: ''
 	});
 	const [loading, setLoading] = useState(true);
 	
@@ -32,9 +33,9 @@ export default function ({ handleUser }) {
 		// initializeSocket(getuser.user)
 	}
 
-	async function handleContactClick(userId) {
+	async function handleContactClick(contact) {
 		const conversation = await conversationService.createConversation(
-			userId
+			contact._id
 		);
 		if(state.messages[conversation.conversation._id] === undefined){
 			setState({
@@ -45,12 +46,14 @@ export default function ({ handleUser }) {
 					[conversation.conversation._id]: {
 						messages: []
 					}
-				}
+				},
+				member: contact
 			});
 		}else{
 			setState({
 				...state,
-				conversation: { ...conversation.conversation }
+				conversation: { ...conversation.conversation },
+				member:contact
 			});
 		}
 			
@@ -125,10 +128,11 @@ export default function ({ handleUser }) {
 	}
 
 
-	async function handleConversation(conversation) {
+	async function handleConversation(conversation, member) {
 		setState({
 			...state,
-			conversation: conversation
+			conversation: conversation,
+			member: member
 		});
 	}
 	useEffect(() => {
@@ -159,12 +163,16 @@ export default function ({ handleUser }) {
 						user={state.user}
 						handleUser={handleUser}
 					/>
-					<ChatComponent
-						user={state.user}
-						conversation={state.conversation}
-						messages={state.messages}
-						handleEmit={handleEmit}
-					/>
+					{state.conversation !== ''
+					?   <ChatComponent
+							user={state.user}
+							conversation={state.conversation}
+							messages={state.messages}
+							handleEmit={handleEmit}
+							member={state.member}
+						/>
+					:	""}
+					
 				</Grid.Row>
 			)}
 		</Grid>
