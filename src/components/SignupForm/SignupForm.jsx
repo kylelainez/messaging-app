@@ -44,7 +44,6 @@ export default function ({ handleUser }) {
 			handleUser();
 			history.push('/');
 		} catch (err) {
-			console.log(err);
 			setError(err.message);
 		}
 	}

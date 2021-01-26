@@ -7,7 +7,6 @@ export default function ({ conversation, handleConversation, user }) {
 
 	async function getUser(id){
 		const convUser = await userService.getUserFromId(id);
-		console.log(convUser, 'here');
 		setName(convUser.user);
 	}
 

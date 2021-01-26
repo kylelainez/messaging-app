@@ -64,7 +64,6 @@ export default function ({ handleUser }) {
 		if(state.user !== ''){
 			socket.emit('logged in',state.user);
 			socket.on('logged in', (data)=> {
-				console.log('new User')
 				const activeUsers = state.activeUsers;
 				activeUsers.push(data);
 				setState({
@@ -85,11 +84,8 @@ export default function ({ handleUser }) {
 								messages: []
 							};
 		conversation.messages.push(data);
-		console.log(state)
 		let userContainsConversation = false;
-		console.log(state.user)
 		for(let conv of state.user.conversationList){
-			console.log(conv._id, 'here')
 			if(conv._id === data.conversation._id){
 				userContainsConversation = true;
 			}
@@ -124,7 +120,6 @@ export default function ({ handleUser }) {
 	function handleEmit(message){
 		message.conversation = state.conversation;
 		socket.emit('message', message);
-		// console.log(socket)
 	}
 
 

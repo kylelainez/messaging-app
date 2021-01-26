@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './ConversationList.css';
-import userService from '../../utils/userService';
 import Conversations from '../Conversations/Conversations';
 
 export default function ({ handleConversation, user }) {
 	return (
-		<>
+		<div className="conversationList">
 			{user
 				? user.conversationList.map((conversation, idx) => {
 						// Will Create separate component later on
@@ -19,6 +18,6 @@ export default function ({ handleConversation, user }) {
 						);
 				  })
 				: ''}
-		</>
+		</div>
 	);
 }

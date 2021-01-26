@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './BottomNav.css';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 import Contacts from './../../images/account_circle-24px.svg';
 import Messages from './../../images/chat-24px.svg';
 import Settings from './../../images/settings-24px.svg';

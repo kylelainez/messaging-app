@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Redirect, Route, Switch} from 'react-router-dom';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import HomePage from '../HomePage/HomePage';
@@ -10,7 +10,6 @@ import userService from '../../utils/userService';
 
 function App() {
 	const [user, setUser] = useState(userService.getUserId());
-	const history = useHistory();
 
 	function handleUser() {
 		setUser(userService.getUserId());
