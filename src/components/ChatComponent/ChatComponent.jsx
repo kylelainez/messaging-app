@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ChatComponent.css';
 import { Grid, Modal, Button } from 'semantic-ui-react';
 import MessageBubble from './../MessageBubble/MessageBubble';
 import Image from '../../images/insert_photo-24px.svg';
 import Send from '../../images/send-24px.svg';
-import userService from '../../utils/userService';
 import messageService from '../../utils/messageService';
 
 export default function ({ conversation, messages, user, handleEmit, member }) {
@@ -14,6 +13,7 @@ export default function ({ conversation, messages, user, handleEmit, member }) {
 		imageUpload: false,
 		selectedFile: ''
 	});
+	const bottomRef = useRef(null);
 
 	function handleInput(e) {
 		setState({ ...state, message: e.target.value });
@@ -65,6 +65,14 @@ export default function ({ conversation, messages, user, handleEmit, member }) {
 			user: user
 		});
 	}, []);
+
+	function scrollToBottom(){
+		bottomRef.current.scrollIntoView({behavior: 'smooth'})
+	}
+
+	useEffect(() => {
+		scrollToBottom();
+	},[messages, conversation])
 	return (
 		<Grid.Column
 			id="Chat-Component"
@@ -85,6 +93,9 @@ export default function ({ conversation, messages, user, handleEmit, member }) {
 							/>
 					  ))
 					: ''}
+					<div style={{ float:"left", clear: "both" }}
+						ref={bottomRef}>
+					</div>
 			</Grid.Row>
 			<Grid divided="vertically" id="ChatField">
 				<Grid.Row style={{ padding: 0, margin: 0 }} width="100%">

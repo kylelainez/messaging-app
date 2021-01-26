@@ -1,5 +1,4 @@
 import React from 'react';
-import messageService from '../../utils/messageService';
 import './MessageBubble.css';
 
 export default function ({ message, user }) {

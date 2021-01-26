@@ -21,8 +21,8 @@ export default function ({ conversation, handleConversation, user }) {
 	function handleClick() {
 		handleConversation(conversation, name);
 	}
-	return <div onClick={handleClick} class="contact">
-		<img src={name.photoUrl} alt="profile" class="contactPhoto"/>
+	return <div onClick={handleClick} className="contact">
+		<img src={name.photoUrl} alt="profile" className="contactPhoto"/>
 		{name.firstName} {name.lastName}
 	</div>
 }
