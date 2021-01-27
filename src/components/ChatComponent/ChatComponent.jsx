@@ -49,7 +49,8 @@ export default function ({ conversation, messages, user, handleEmit, member }) {
 		formData.append('photo', state.selectedFile);
 		formData.append('sender', state.user._id);
 		formData.append('conversation', conversation._id);
-		await messageService.uploadPhoto(formData);
+		const newMessage = await messageService.uploadPhoto(formData);
+		handleEmit(newMessage.message)
 		closeImageUpload();
 	}
 	function handleFileInput(e) {
