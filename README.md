@@ -1,52 +1,40 @@
-## Setup 
+# Convey
 
-1. Clone the repo
-2. Rename the folder to your Project 
-3. Delete the `.git` file, when you are in the root of the file, you can press `ls -a` and you should see a `.git` file, then go ahead and run `rm -rf .git`
+Convey messaging app allows you to communicate with your friends no matter how far you are apart. Convey is a simple real-time messaging app that is made with MERN stack. 
 
+# Screenshots
 
-#### Setup your git repo
-1. in the project root `git init`
-2. `git add .` to add all the starter code
-3. `git commit -m "setup boilerplate"` 
-4. go to github and create your github and create a repo (Without a readme or liscense you can add that later!)
-5. copy the remote address
-6. In your terminal add the remote `git remote add origin 'yourGithubRepo'sAddressGoesHere`
-7. `git pull origin master` If a screen pulls up asking you to do something just press `:q` and then `enter` (thats vim btw :) )
-8. `git push origin master`
+![homepage](https://i.imgur.com/bXnue30.png)
+![loginPage](https://i.imgur.com/gJrmQ48.png)
+![signupPage](https://i.imgur.com/g64selC.png)
+![messagePage](https://i.imgur.com/drvi8pn.png)
+![conversationPage](https://i.imgur.com/5jAcl52.png)
 
-#### update npm packages
+# Technologies Used
 
-1. `npm update` this will update your node packages to the latest version, this can help keep your boilerplates up to date
+* Hypertext Markup Language
+* Cascading Style Sheets
+* JavaScript
+* Express.js
+* Node.js
+* MongoDB
+* React
+* Semantic Ui
+* AWS S3
+* Socket.io
+* Heroku
 
-#### Setup .env file
+# Getting Started
 
-1. `touch .env` in the root of your project
-2. Add the `SECRET` that your jwt tokens require
+Use Convey: https://convey-messaging.herokuapp.com/messages 
 
-```
-SECRET=ILOVETACOS
-```
+Trello Board: https://trello.com/b/ArbXY3QG/react-messaging-app
 
-#### update package.json 
+# Icebox
 
-- update the name property in your package.json to the name of your project
-
-#### Public folder
-
-- `index.html` - update the `title` property to the name of your project
-
-#### update db name
-
-- auth/db.js
-
-```js
-mongoose.connect(
-  'mongodb://localhost:27017/puppies', // update puppies to your projects name
-  { useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  }
-);
-```
+* Active users
+* Message timestamps
+* Read timestamps
+* Voice Call / Video Call
+* Edit / Delete Messages
+* Edit Profile
