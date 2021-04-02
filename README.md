@@ -26,7 +26,7 @@ Convey messaging app allows you to communicate with your friends no matter how f
 
 # Getting Started
 
-Use Convey: https://convey-messaging.herokuapp.com/messages 
+Use Convey: https://convey-messaging.herokuapp.com/ 
 
 Trello Board: https://trello.com/b/ArbXY3QG/react-messaging-app
 
